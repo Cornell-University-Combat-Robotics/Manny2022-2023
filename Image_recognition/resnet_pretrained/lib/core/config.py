@@ -1,1 +1,1 @@
-BASE_PATH = "/Users/richmjin/Desktop/Projects/resnet_pretrained/"
+BASE_PATH = "C:\\Users\\Srive\\OneDrive\\Documents\\College\\CRC\Manny2022-2023\\Manny2022-2023\\Image_recognition\\resnet_pretrained"

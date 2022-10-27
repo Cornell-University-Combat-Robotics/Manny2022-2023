@@ -12,7 +12,7 @@ startTime = time.time()
 # =======================================
 t = transforms.Compose([transforms.Resize((config.INPUT_IMAGE_HEIGHT,config.INPUT_IMAGE_WIDTH)),
       transforms.ToTensor()])
-mnist_val = MNIST(root='/Users/richmjin/Desktop/Projects/digits_recog/mnist', train=False, download=True, transform=t)
+mnist_val = MNIST(root='C:\\Users\\Srive\\OneDrive\\Documents\\College\\CRC\\Manny2022-2023\\Manny2022-2023\\Image_recognition\\digits_recog\\mnist', train=False, download=True, transform=t)
 
 # Load all 10000 images from the validation set.
 n = 10000
