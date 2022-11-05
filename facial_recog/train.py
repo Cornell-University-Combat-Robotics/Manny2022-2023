@@ -28,7 +28,12 @@ name2num = {"Blaze":0, "Sebastian":1}
 for e in train_img_paths:
   train_img = cv2.imread(e)
   train_image_lst.append(train_img)
+  # splits the file path using "_" and "." characters
+  # Example: "/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/1_Blaze.jpg"
+  # --> [... img/1, Blaze, jpg]
   path_segmented = re.split(r"[_.]",e)
+  # gets the second to last value in path_segmented (the person's name)
+  # add the person's name to our list of labels 
   train_label_lst.append(name2num[path_segmented[-2]])
 
 # print(train_label_lst)

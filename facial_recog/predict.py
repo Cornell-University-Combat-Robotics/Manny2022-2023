@@ -12,6 +12,7 @@ transforms = transforms.Compose([transforms.ToPILImage(),
 		config.INPUT_IMAGE_WIDTH)),
 	transforms.ToTensor()])
 
+# input image (change path as needed)
 img = cv2.imread("/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/3_Sebastian.jpg")
 img = transforms(img)
 
@@ -19,6 +20,7 @@ img = transforms(img)
 img = np.expand_dims(img, 0)
 img = torch.from_numpy(img)
 
+# reminder that cnn = convolutional neural network
 cnn = torch.load("/Users/richmjin/Desktop/facial_recog/output/face_recog.pth")
 cnn.eval()
 
@@ -28,5 +30,10 @@ predicted_person = torch.argmax(output, dim=1)
 
 name2num = {0:"Blaze", 1:"Sebastian"}
 
+# outputs numbers
+# 1st number corresponds to 1st person (Blaze), 2nd number corresponds to 2nd person (Sebastian) and so on
+# higher number = greater confidence that the photo is of the associated person
 print(output)
+
+# picks out the highest number and prints the associated name of the person
 print(name2num[predicted_person.numpy()[0]])
