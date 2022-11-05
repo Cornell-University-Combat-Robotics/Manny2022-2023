@@ -17,24 +17,38 @@ transforms = transforms.Compose([transforms.ToPILImage(),
 		config.INPUT_IMAGE_WIDTH)),
 	transforms.ToTensor()])
 
-train_img_paths = list(paths.list_images(config.TRAIN_IMG_PATH))
-# print(image_paths)
+b_train_img_paths = list(paths.list_images(config.B_TRAIN_IMG_PATH))
+s_train_img_paths = list(paths.list_images(config.S_TRAIN_IMG_PATH))
 
 train_image_lst = []
 train_label_lst = []
 
 name2num = {"Blaze":0, "Sebastian":1}
 
-for e in train_img_paths:
-  train_img = cv2.imread(e)
-  train_image_lst.append(train_img)
-  # splits the file path using "_" and "." characters
-  # Example: "/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/1_Blaze.jpg"
-  # --> [... img/1, Blaze, jpg]
-  path_segmented = re.split(r"[_.]",e)
-  # gets the second to last value in path_segmented (the person's name)
-  # add the person's name to our list of labels 
-  train_label_lst.append(name2num[path_segmented[-2]])
+# for e in train_img_paths:
+#   train_img = cv2.imread(e)
+#   train_image_lst.append(train_img)
+#   # splits the file path using "_" and "." characters
+#   # Example: "/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/1_Blaze.jpg"
+#   # --> [... img/1, Blaze, jpg]
+#   path_segmented = re.split(r"[_.]",e)
+#   # gets the second to last value in path_segmented (the person's name)
+#   # add the person's name to our list of labels 
+#   train_label_lst.append(name2num[path_segmented[-2]])
+
+for i, e in enumerate(b_train_img_paths):
+  if 100<=i<=800:
+    train_img = cv2.imread(e)
+    train_image_lst.append(train_img)
+    path_segmented = re.split(r"[_.]",e)
+    train_label_lst.append(name2num[path_segmented[-2]])
+
+for i, e in enumerate(s_train_img_paths):
+  if 100<=i<=800:
+    train_img = cv2.imread(e)
+    train_image_lst.append(train_img)
+    path_segmented = re.split(r"[_.]",e)
+    train_label_lst.append(name2num[path_segmented[-2]])
 
 # print(train_label_lst)
 
