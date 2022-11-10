@@ -1,6 +1,6 @@
-B_TRAIN_IMG_PATH = "/Users/richmjin/Desktop/facial_recog/lib/dataset/Blaze1"
-S_TRAIN_IMG_PATH = "/Users/richmjin/Desktop/facial_recog/lib/dataset/Seb1"
-R_TRAIN_IMG_PATH = "/Users/richmjin/Desktop/facial_recog/lib/dataset/Rick1"
+B_TRAIN_IMG_PATH = "/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/lib/dataset/Blaze1"
+S_TRAIN_IMG_PATH = "/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/lib/dataset/Seb1"
+R_TRAIN_IMG_PATH = "/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/lib/dataset/Rick1"
 
 INPUT_IMAGE_HEIGHT = 256
 INPUT_IMAGE_WIDTH = 256
@@ -23,5 +23,5 @@ INIT_LR = 1e-3
 # once again, determining the optimal number of epochs requires testing
 NUM_EPOCHS = 10
 
-PLOT_PATH = "/Users/richmjin/Desktop/facial_recog/output/losses.png"
-MODEL_PATH = "/Users/richmjin/Desktop/facial_recog/output/face_recog.pth"
+PLOT_PATH = "/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/output/losses.png"
+MODEL_PATH = "/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/output/face_recog.pth"

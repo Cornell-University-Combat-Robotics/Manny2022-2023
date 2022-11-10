@@ -13,14 +13,14 @@ transforms = transforms.Compose([transforms.ToPILImage(),
 	transforms.ToTensor()])
 
 # input image (change path as needed)
-img = cv2.imread("/Users/richmjin/Desktop/facial_recog/lib/dataset/Seb1/751_Sebastian.png")
-img = transforms(img)
+img1 = cv2.imread("/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/lib/dataset/Seb1/751_Sebastian.png")
+img = transforms(img1)
 
 # img = np.transpose(img, (2, 0, 1))
 img = np.expand_dims(img, 0)
 img = torch.from_numpy(img)
 
-cnn = torch.load("/Users/richmjin/Desktop/facial_recog/output/face_recog.pth")
+cnn = torch.load("/Users/bezla/Documents/CRC_Stuff/Manny2022-2023/facial_recog/output/face_recog.pth")
 cnn.eval()
 
 output = cnn(img)
@@ -39,3 +39,7 @@ print(name2num[predicted_person.numpy()[0]])
 
 # https://pyimagesearch.com/2021/07/19/pytorch-training-your-first-convolutional-neural-network-cnn/
 # for accuracy implementation
+labeled_img = cv2.putText(img1 , name2num[predicted_person.numpy()[0]], (50,50), \
+	cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0, 255), 2 )
+cv2.imshow('labeled image', labeled_img)
+cv2.waitKey(0)
