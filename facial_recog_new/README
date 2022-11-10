@@ -1,0 +1,24 @@
+* FILE SETUP + DESCRIPTION
+lib
+    core
+       config.py - set up width, height, path of images, epoch, batch size
+     dataset
+        input_img - folder containing member headshots from the spring 2021 photoshoot. Images must be named #_memberName.jpg 
+        dataset.py - creates a dataset class
+    model
+        model.py - creates a CNN (Convolutional Neural Network) class
+output
+    losses.png - graph showing how much the model changes after each epoch
+predict.py - where we use the model. Choose an image path on line 16 to feed into the model. The model will return the predicted person
+train.py - used to train the model (no need to retrain unless adjusting training images, epoch, or batch size)
+
+* VOCAB
+Batch - The number of images simultaneously fed into the model for training
+Epoch - The number of times each batch is fed into the model for training
+
+* GENERAL PROCESS
+1. Laying the groundwork: We setup config.py, dataset.py, and model.py and upload photos to input_img. Change paths in config.py to align with local directories
+2. Train the model using train.py
+3. Use the model using predict.py
+
+See individual files for specifics
