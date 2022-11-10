@@ -15,17 +15,16 @@ class CNN(torch.nn.Module):
         self.conv2 = torch.nn.Conv2d(10,20,kernel_size=5)
         
         self.max_pool = torch.nn.MaxPool2d(2)
-
+        
         # the first argument needs to start out as a placeholder
         # later adjust this value according to error messages
         # "creates a single layer feed-forward network with n inputs and m outputs"
-        self.flatten_conv = torch.nn.Linear(74420,2)
-
+        self.flatten_conv = torch.nn.Linear(74420,2) 
+        
     def forward(self,x):
         in_size = x.size(0) # in_size is the size of one batch
         x = F.relu(self.max_pool(self.conv1(x)))
         x = F.relu(self.max_pool(self.conv2(x)))
         x = x.view(in_size,-1)
         x = self.flatten_conv(x)
-        return x
-        # return F.log_softmax(x,dim=1)
+        return F.log_softmax(x,dim=1)

@@ -13,14 +13,13 @@ transforms = transforms.Compose([transforms.ToPILImage(),
 	transforms.ToTensor()])
 
 # input image (change path as needed)
-img = cv2.imread("/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/3_Sebastian.jpg")
+img = cv2.imread("/Users/richmjin/Desktop/facial_recog/lib/dataset/Seb1/751_Sebastian.png")
 img = transforms(img)
 
 # img = np.transpose(img, (2, 0, 1))
 img = np.expand_dims(img, 0)
 img = torch.from_numpy(img)
 
-# reminder that cnn = convolutional neural network
 cnn = torch.load("/Users/richmjin/Desktop/facial_recog/output/face_recog.pth")
 cnn.eval()
 
@@ -37,3 +36,6 @@ print(output)
 
 # picks out the highest number and prints the associated name of the person
 print(name2num[predicted_person.numpy()[0]])
+
+# https://pyimagesearch.com/2021/07/19/pytorch-training-your-first-convolutional-neural-network-cnn/
+# for accuracy implementation

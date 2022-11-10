@@ -25,30 +25,31 @@ train_label_lst = []
 
 name2num = {"Blaze":0, "Sebastian":1}
 
-# for e in train_img_paths:
-#   train_img = cv2.imread(e)
-#   train_image_lst.append(train_img)
-#   # splits the file path using "_" and "." characters
-#   # Example: "/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/1_Blaze.jpg"
-#   # --> [... img/1, Blaze, jpg]
-#   path_segmented = re.split(r"[_.]",e)
-#   # gets the second to last value in path_segmented (the person's name)
-#   # add the person's name to our list of labels 
-#   train_label_lst.append(name2num[path_segmented[-2]])
-
 for i, e in enumerate(b_train_img_paths):
-  if 100<=i<=800:
+  if 100<=i<=400:
     train_img = cv2.imread(e)
     train_image_lst.append(train_img)
+    # splits the file path using "_" and "." characters
+    # Example: "/Users/richmjin/Desktop/facial_recog/lib/dataset/input_img/1_Blaze.jpg"
+    # --> [... img/1, Blaze, jpg]
     path_segmented = re.split(r"[_.]",e)
+    # gets the second to last value in path_segmented (the person's name)
+    # add the person's name to our list of labels 
     train_label_lst.append(name2num[path_segmented[-2]])
 
 for i, e in enumerate(s_train_img_paths):
-  if 100<=i<=800:
+  if 100<=i<=400:
     train_img = cv2.imread(e)
     train_image_lst.append(train_img)
     path_segmented = re.split(r"[_.]",e)
     train_label_lst.append(name2num[path_segmented[-2]])
+
+# for i, e in enumerate(r_train_img_paths):
+#   if 0<=i<=3:
+#     train_img = cv2.imread(e)
+#     train_image_lst.append(train_img)
+#     path_segmented = re.split(r"[_.]",e)
+#     train_label_lst.append(name2num[path_segmented[-2]])
 
 # print(train_label_lst)
 
@@ -62,7 +63,7 @@ cnn = model.CNN()
 cnn.train()
 
 opt = torch.optim.Adam(params=cnn.parameters(), lr=config.INIT_LR)
-loss_fn = torch.nn.CrossEntropyLoss()
+loss_fn = torch.nn.NLLLoss()
 
 train_losses = []
 
@@ -71,9 +72,8 @@ startTime = time.time()
 for epoch in range(config.NUM_EPOCHS):
     for i, (imgs, labels) in enumerate(train_loader):
         # imgs, labels = imgs.to(config.DEVICE), labels.to(config.DEVICE)
-        # Reshape data from [500, 1, 28, 28] to [500, 784] and use the model to make predictions.
+        # Reshape data from [2, 3, 256, 256] to [2, 196608] and use the model to make predictions.
         predictions = cnn(imgs)  
-        # print(predictions)
 
         # Compute the loss.
         loss = loss_fn(predictions, labels)
@@ -94,7 +94,7 @@ plt.style.use("ggplot")
 plt.figure()
 plt.plot(train_losses, label="train_loss")
 plt.title("Training Loss on Dataset")
-plt.xlabel("Epoch #")
+plt.xlabel("Batch #")
 plt.ylabel("Loss")
 plt.legend(loc="lower left")
 plt.savefig(config.PLOT_PATH)
