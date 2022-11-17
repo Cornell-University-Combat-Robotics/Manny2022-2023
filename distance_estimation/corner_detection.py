@@ -17,11 +17,11 @@ def get_corners(img_path):
     g=1
     b=2
 
-    r_query = 135
-    g_query = 135
-    b_query = 70
+    r_query = 140
+    g_query = 150
+    b_query = 140
 
-    Y,X = np.where((img[:,:,r] >= r_query) & (img[:,:,g] >= g_query) & (img[:,:,b] <= b_query))
+    Y,X = np.where((img[:,:,r] <= r_query) & (img[:,:,g] >= g_query) & (img[:,:,b] <= b_query))
     y_points = np.column_stack((X,Y))
 
     min_x = min(y_points, key = lambda x: x[0])[0]
@@ -59,3 +59,5 @@ def get_corners(img_path):
 
     # (x coordinate, y coordinate)
     return fps
+
+#print(get_corners('Blaze2.jpg'))
