@@ -14,9 +14,19 @@ class CNN(torch.nn.Module):
         # Initially do not know input is 320. 
         # Put in a random number, find out based on the error message.
     def forward(self,x):
+        # print('a')
         in_size = x.size(0) # in_size is the size of one batch
-        x = F.relu(self.max_pool(self.conv1(x)))
+        #print('b1')
+        c1 = self.conv1(x)
+        #print('b2')
+        m1 = self.max_pool(c1)
+        #print('b3')
+        x = F.relu(m1)
+        #print('c')
         x = F.relu(self.max_pool(self.conv2(x)))
+        #print('d')
         x = x.view(in_size,-1)
+        #print('e')
         x = self.flatten_conv(x)
+        #print('f')
         return F.log_softmax(x,dim=1)
