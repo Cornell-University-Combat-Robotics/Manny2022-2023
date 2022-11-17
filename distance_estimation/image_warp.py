@@ -6,16 +6,16 @@ from skimage.io import imread, imshow
 import corner_detection
 from PIL import Image
 
-def warp(file_path):
+def warp(img):
     # code taken from https://towardsdatascience.com/image-processing-with-python-applying-homography-for-image-warping-84cd87d2108f
 
-    sign = imread(file_path)
+    sign = img
     height, width, depth = sign.shape
     print("width is ", width)
     print("height is", height)
 
 
-    points_of_interest = np.array(corner_detection.get_corners(file_path))
+    points_of_interest = np.array(corner_detection.get_corners(img))
 
     print("points of interest are", points_of_interest)
     if len(points_of_interest) != 4:

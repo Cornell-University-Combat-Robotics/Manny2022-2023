@@ -6,6 +6,8 @@ import cv2
 from time import sleep
 
 
+
+
 maxThrottle = 0.25
 motor = mM.Motor(2, 3, 4, 17, 22, 27)
 
@@ -21,6 +23,7 @@ while True:
         sleep(0.300)
     if record == 1:
         img = wM.getImg(True,size=[240,120])
+        
         dcM.saveData(img,steering)
     elif record == 2:
         dcM.saveLog()

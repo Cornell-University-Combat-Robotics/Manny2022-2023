@@ -9,8 +9,8 @@ import time
 
 np.set_printoptions(threshold=sys.maxsize)
 
-def get_corners(img_path):
-    img = np.array(Image.open(img_path))
+def get_corners(img):
+    #img = np.array(Image.open(img_path))
     height, width = img.shape[0], img.shape[1]
 
     r=0
@@ -51,8 +51,8 @@ def get_corners(img_path):
     # 3----------4
     fps = sorted(fps, key=lambda tup: tup[0] * 5 + tup[1]*10)
 
-    for p in fps:
-        img[p[1], p[0]] = np.array([255,0,0])
+    # for p in fps:
+    #     img[p[1], p[0]] = np.array([255,0,0])
 
     # img = Image.fromarray(img, 'RGB')
     # img.show()

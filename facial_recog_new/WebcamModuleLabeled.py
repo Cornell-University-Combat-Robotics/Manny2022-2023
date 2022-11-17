@@ -11,6 +11,9 @@ import cv2
 from torchvision import transforms
 import numpy as np
 import predict
+import sys
+sys.path.append("../distance_estimation")
+import image_warp
 # from facial_recog_new import predict
 # from facial_recog_new import lib
 # import /home/firmware/crc_fa22/unpushed/Neural-Networks-Self-Driving-Car-Raspberry-Pi-main/Step1-Data-Collection/predict
@@ -43,8 +46,13 @@ def getImg(display= False,size=[400,240]):
     # output = cnn(img)
 
     if counter == 10:
-        output = predict.func(img)
-        counter = 0
+        try:
+            arr = image_warp.warp(img)
+            new_img = image_warp.crop(arr[0], arr[1]) 
+            output = predict.func(new_img)
+            counter = 0
+        except:
+            output = "None"
     img = cv2.putText(img, output, (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
     
     if display:
