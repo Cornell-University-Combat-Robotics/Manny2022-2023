@@ -21,9 +21,10 @@ while True:
         record +=1
         sleep(0.300)
     if record == 1:
-       	img = wM.getImg(True,size=[240,120])
+       	img = wM.getImg(True,size=[500,300])
     elif record == 2:
-        record = 0
+        record=0
+
     if joyVal['x']:
         motor.move(-backwards,-steering)
     else:

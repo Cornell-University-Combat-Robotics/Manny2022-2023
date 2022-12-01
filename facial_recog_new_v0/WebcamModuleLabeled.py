@@ -11,6 +11,8 @@ import cv2
 from torchvision import transforms
 import numpy as np
 import predict
+import sys
+sys.path.append("../distance_estimation")
 import image_warp
 # from facial_recog_new import predict
 # from facial_recog_new import lib
@@ -22,44 +24,39 @@ cap.set(cv2.CAP_PROP_FPS,10)
 
 counter = 0
 output = "None"
-new_img = None
-changed = False
 
-def getImg(display= False,size=[500,300]):
+def getImg(display= False,size=[400,240]):
     global counter, output
     counter += 1
 
+    # t = transforms.Compose([transforms.ToPILImage(),
+ 	#     transforms.Resize((size[0],size[1])),transforms.ToTensor()])
+
     _, img = cap.read()
-    img = cv2.resize(img,(size[0],size[1]))
+    # img = t(img)
+
+    # # img = np.transpose(img, (2, 0, 1))
+    # img = np.expand_dims(img, 0)
+    # img = torch.from_numpy(img)
+
+    # # reminder that cnn = convolutional neural network
+    # cnn = torch.load("/home/firmware/crc_fa22/unpushed/Neural-Networks-Self-Driving-Car-Raspberry-Pi-main/Step1-Data-Collection/facial_recog_new/face_recog.pth")
+    # cnn.eval()
+
+    # output = cnn(img)
 
     if counter == 10:
-
-        # this is for cropping:
-        # ---------------------
-        # try:
-        #     img = image_warp.warp(img)
-        #     img = image_warp.crop(img[0], img[1]) 
-        #     img *= 255
-        #     img = img.astype(np.uint8)
-        #     img = cv2.resize(img,(size[0],size[1]))
-        #     output = predict.func(img)
-        #     cv2.imwrite("/home/firmware/crc_fa22/unpushed/Neural-Networks-Self-Driving-Car-Raspberry-Pi-main/Step1-Data-Collection/facial_recog_new/test_crop_img/0.jpg",img)
-        # except:
-        #     output = "None"
-        # ---------------------
-
-        # this is for non cropping:
-        # ---------------------
-        output = predict.func(img)
-        # ---------------------
-
-        counter = 0
-
+        try:
+            arr = image_warp.warp(img)
+            new_img = image_warp.crop(arr[0], arr[1]) 
+            output = predict.func(new_img)
+            counter = 0
+        except:
+            output = "None"
     img = cv2.putText(img, output, (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
-
+    
     if display:
         cv2.imshow('IMG',img)
-        
     return img
 
 if __name__ == '__main__':
